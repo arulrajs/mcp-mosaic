@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101814">
+  <title>Mosaic | Local Privacy Gateway</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='demo.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Mosaic home">
+      <span class="brand-mark">M</span>
+      <span>MOSAIC<span class="brand-dot">.</span></span>
+    </a>
+    <div class="topbar-meta"><span class="pulse"></span> LOCAL PRIVACY GATEWAY <span class="divider">/</span> HACKATHON POC</div>
+    <div id="connection" class="connection"><span class="connection-dot"></span><span>Checking Ollama</span></div>
+  </header>
+
+  <main class="shell">
+    <section class="intro">
+      <div class="intro-copy">
+        <p class="eyebrow">PRIVATE CONTEXT. USEFUL REASONING.</p>
+        <h1>Keep the context.<br><span>Lose the exposure.</span></h1>
+        <p class="lede">Network identifiers are mosaiced before a local model sees them, then restored only at the tool boundary.</p>
+      </div>
+      <div class="run-box">
+        <div class="run-box-top"><span class="eyebrow">LOCAL INFERENCE</span><span class="local-tag">127.0.0.1</span></div>
+        <label for="model">Ollama model</label>
+        <select id="model" disabled><option>Looking for local models...</option></select>
+        <button id="run" type="button" disabled><span>Run private flow</span><span class="button-arrow">&#8594;</span></button>
+        <p id="run-status" class="run-status">Synthetic demo data. No Mist tenant is connected.</p>
+      </div>
+    </section>
+
+    <section class="task-strip" aria-label="Demo task">
+      <div class="task-label"><span class="step-number">TASK</span><span>REQUEST</span></div>
+      <p id="intent">Loading demo task...</p>
+      <span class="synthetic-tag">SYNTHETIC DATA</span>
+    </section>
+
+    <section class="flow" aria-label="Privacy flow">
+      <div class="flow-step active" data-step="source"><span class="flow-index">01</span><span class="flow-name">Mist tool data</span><span class="flow-state">SOURCE</span></div>
+      <span class="flow-link"></span>
+      <div class="flow-step active" data-step="mosaic"><span class="flow-index">02</span><span class="flow-name">Mosaic proxy</span><span class="flow-state">MASK</span></div>
+      <span class="flow-link"></span>
+      <div class="flow-step" data-step="model"><span class="flow-index">03</span><span class="flow-name">Local Ollama</span><span class="flow-state">REASON</span></div>
+      <span class="flow-link"></span>
+      <div class="flow-step" data-step="restore"><span class="flow-index">04</span><span class="flow-name">Tool boundary</span><span class="flow-state">RESTORE</span></div>
+    </section>
+
+    <section class="evidence-grid">
+      <article class="evidence-panel raw-panel">
+        <div class="panel-head"><div><span class="panel-kicker">01 / SOURCE</span><h2>API response</h2></div><span class="panel-mark">REAL VALUES</span></div>
+        <pre id="raw-data" class="code-block">Waiting for preview...</pre>
+      </article>
+      <article class="evidence-panel safe-panel">
+        <div class="panel-head"><div><span class="panel-kicker">02 / MODEL INPUT</span><h2>What the model sees</h2></div><span id="privacy-badge" class="privacy-badge">PREFLIGHT</span></div>
+        <pre id="safe-data" class="code-block">Building sanitized context...</pre>
+        <div class="panel-foot"><span class="shield-icon">&#9670;</span><span id="privacy-note">Sensitive values are checked before every local model request.</span></div>
+      </article>
+      <article class="evidence-panel reasoning-panel">
+        <div class="panel-head"><div><span class="panel-kicker">03 / LOCAL INFERENCE</span><h2>Model decision</h2></div><span class="panel-mark">OLLAMA</span></div>
+        <pre id="model-data" class="code-block empty-state">Run the flow to see the local model's token-only decision.</pre>
+      </article>
+      <article class="evidence-panel restore-panel">
+        <div class="panel-head"><div><span class="panel-kicker">04 / ROUND TRIP</span><h2>Restored tool call</h2></div><span class="dry-run-tag">DRY RUN</span></div>
+        <pre id="restored-data" class="code-block empty-state">Resolved values stay on this machine. No tool call is made.</pre>
+        <div class="panel-foot"><span class="dry-dot"></span><span>Preview only. No Mist API is connected.</span></div>
+      </article>
+    </section>
+
+    <footer class="footer"><span>MOSAIC / ROUND-TRIP DATA PROTECTION</span><span>ALL MODEL TRAFFIC STAYS ON THIS MACHINE</span></footer>
+  </main>
+  <script src="{{ url_for('static', filename='demo.js') }}" defer></script>
+</body>
+</html>
